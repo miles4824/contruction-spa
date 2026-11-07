@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mô Phỏng Thông Hơi & Giải Pháp Chống Nước Lấp Khí - The Selena Spa</title>
+  <title>Mô Phỏng 3 Dạng Ống & Giải Pháp Chống Nước Lấp Khí - The Selena Spa</title>
   <style>
     :root {
       --bg-page: #0f172a;
@@ -16,7 +16,6 @@
       --green: #16a34a;
       --blue: #38bdf8;
       --amber: #f59e0b;
-      --purple: #a855f7;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,7 +28,7 @@
     }
     .container { max-width: 1140px; margin: 0 auto; }
 
-    /* TAB CHÍNH ĐIỀU HƯỚNG 2 PHẦN */
+    /* TAB ĐIỀU HƯỚNG 2 PHẦN */
     .nav-tabs {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -59,12 +58,12 @@
       background: #1e293b;
       border-color: var(--blue);
       color: #38bdf8;
-      box-shadow: 0 4px 16px rgba(56, 189, 248, 0.2);
+      box-shadow: 0 4px 16px rgba(56, 189, 248, 0.25);
     }
     .main-tab-btn.active-detail {
       border-color: var(--amber);
       color: #fbbf24;
-      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.2);
+      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.25);
     }
 
     .header {
@@ -140,7 +139,7 @@
       font-weight: 700;
     }
 
-    /* GRID CHÍNH */
+    /* GRID CHÍNH & VÙNG VẼ SVG */
     .main-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 16px; }
     @media (max-width: 860px) { .main-grid { grid-template-columns: 1fr; } }
 
@@ -153,8 +152,17 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      min-height: 440px;
+      width: 100%;
       position: relative;
     }
+    .canvas-card svg {
+      width: 100%;
+      max-width: 440px;
+      height: 425px;
+      display: block;
+    }
+
     .info-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -162,7 +170,6 @@
       padding: 20px;
       font-size: 13.5px;
     }
-
     .box-bad {
       background: rgba(239, 68, 68, 0.12);
       border: 1px solid rgba(239, 68, 68, 0.45);
@@ -196,7 +203,7 @@
       padding: 11px 13px;
     }
 
-    /* ANIMATIONS */
+    /* HIỆU ỨNG ANIMATION */
     @keyframes flowDown {
       0% { transform: translateY(-18px); opacity: 0.95; }
       100% { transform: translateY(42px); opacity: 0.95; }
@@ -214,31 +221,24 @@
       50% { opacity: 0.72; }
     }
     @keyframes waterRush {
-      0% { transform: translateY(-80px); opacity: 0.3; }
-      40% { opacity: 1; }
-      100% { transform: translateY(120px); opacity: 0.9; }
+      0% { transform: translateY(-90px); opacity: 0.2; }
+      50% { opacity: 1; }
+      100% { transform: translateY(110px); opacity: 0.9; }
     }
-    @keyframes waterSplashT {
-      0% { transform: scale(0.6); opacity: 0.2; }
-      50% { transform: scale(1.15); opacity: 0.9; }
-      100% { transform: scale(1); opacity: 0.8; }
-    }
-    @keyframes gasBack {
-      0% { stroke-dashoffset: 0; }
-      100% { stroke-dashoffset: 60; }
+    @keyframes splashTrap {
+      0% { transform: scale(0.7); opacity: 0.3; }
+      50% { transform: scale(1.15); opacity: 0.95; }
+      100% { transform: scale(1); opacity: 0.85; }
     }
 
     .water-slug { animation: flowDown 1.9s infinite ease-in; }
     .bubble-bad { animation: bubbleBad 1.4s infinite ease-out; }
     .air-path { stroke-dasharray: 8 6; animation: escapeGood 1.4s infinite linear; }
     .red-zone { animation: pulseRed 1.5s infinite ease-in-out; }
-    .water-rush-fast { animation: waterRush 1.2s infinite cubic-bezier(0.4, 0, 0.2, 1); }
-    .splash-trap { animation: waterSplashT 1.6s infinite ease-in-out; }
-    .gas-back-bad { stroke-dasharray: 6 4; animation: gasBack 1.2s infinite linear; }
+    .water-rush-fast { animation: waterRush 1.3s infinite cubic-bezier(0.4, 0, 0.2, 1); }
+    .splash-trap { animation: splashTrap 1.6s infinite ease-in-out; }
 
-    svg { max-width: 100%; height: auto; }
-
-    /* NÚT THAO TÁC XẢ THỬ Ở PHẦN 2 */
+    /* NÚT XẢ NƯỚC THỬ NGHIỆM */
     .flush-ctrl {
       position: absolute;
       top: 14px;
@@ -263,23 +263,23 @@
 <body>
   <div class="container">
 
-    <!-- 2 TAB CHÍNH -->
+    <!-- 2 TAB CHÍNH ĐIỀU HƯỚNG -->
     <div class="nav-tabs">
-      <button id="tab-nav-1" class="main-tab-btn" onclick="switchMainTab(1)">
+      <button id="tab-nav-1" class="main-tab-btn active" onclick="switchMainTab(1)">
         <span>🏢 PHẦN 1: TOÀN CẢNH 3 TẦNG & 3 DẠNG ỐNG</span>
       </button>
-      <button id="tab-nav-2" class="main-tab-btn active active-detail" onclick="switchMainTab(2)">
+      <button id="tab-nav-2" class="main-tab-btn" onclick="switchMainTab(2)">
         <span>🔍 PHẦN 2: SOI CHÂN ỐNG (TÊ NGANG BỊ LẤP KHÍ vs CHỮ Y 45° vs TRẦN HẦM)</span>
       </button>
     </div>
 
-    <!-- NỘI DUNG PHẦN 1: MÔ PHỎNG TOÀN NHÀ (3 DẠNG ỐNG) -->
-    <div id="section-1" style="display: none;">
+    <!-- ==================== PHẦN 1: MÔ PHỎNG TOÀN CẢNH ==================== -->
+    <div id="section-1">
       <div class="header">
         <div class="header-top">
           <div class="header-title">
-            <h1>MÔ PHỎNG THỰC TẾ: 3 DẠNG ỐNG TRONG HỘP GEN - THE SELENA SPA</h1>
-            <p>Thực tế kiểm tra: Nhấn xả Tầng 1 → Cả Tầng 2 & Tầng Trệt đều ục • Trệt xả tự rút rất từ từ</p>
+            <h1>MÔ PHỎNG KẾT QUẢ TEST THỰC TẾ: 3 DẠNG ỐNG TRONG HỘP GEN - THE SELENA SPA</h1>
+            <p>Hiện tượng thực tế: Nhấn xả Tầng 1 → Cả Tầng 2 (trên) và Tầng Trệt (dưới) đều ục • Tầng Trệt tự xả rút rất từ từ</p>
           </div>
           <div class="mode-group">
             <button id="btn-mode-bad" class="mode-btn active-bad" onclick="setMode('bad')">1. Hiện tại (Bí khí đỏ & Ục)</button>
@@ -294,22 +294,18 @@
       </div>
 
       <div class="main-grid">
-        <div class="canvas-card">
-          <div id="svg-stage"></div>
-        </div>
-        <div class="info-card">
-          <div id="desc-stage"></div>
-        </div>
+        <div id="svg-stage" class="canvas-card"></div>
+        <div id="desc-stage" class="info-card"></div>
       </div>
     </div>
 
-    <!-- NỘI DUNG PHẦN 2: CHI TIẾT CHÂN ỐNG ĐỨNG (TRẢ LỜI CÂU HỎI CHỮ T CÓ BỊ LẤP KHÍ KHÔNG) -->
-    <div id="section-2">
+    <!-- ==================== PHẦN 2: SOI KỸ THUẬT CHÂN ỐNG ==================== -->
+    <div id="section-2" style="display: none;">
       <div class="header">
         <div class="header-top">
           <div class="header-title">
             <h1>THỦY LỰC CHÂN ỐNG ĐỨNG: KHI NƯỚC LAO XUỐNG CÓ LẤP KHÍ CHỮ T KHÔNG?</h1>
-            <p>So sánh cơ chế dòng chảy: <b>Tê vuông 90° (Bị ngập)</b> vs <b>Ba chạc Y 45° ngửa (Thoát êm)</b> vs <b>Cắm trực tiếp nắp hầm (Tuyệt đối)</b></p>
+            <p>So sánh cơ chế dòng chảy: <b>Tê vuông 90° (Bị ngập lấp khí)</b> vs <b>Ba chạc Y 45° ngửa (Thoát êm)</b> vs <b>Cắm trực tiếp trần hầm (+230mm)</b></p>
           </div>
         </div>
         <div class="type-grid">
@@ -320,15 +316,8 @@
       </div>
 
       <div class="main-grid">
-        <div class="canvas-card">
-          <button class="flush-ctrl" onclick="triggerFlush()">
-            <span>🌊 Nhấn Xả Nước Lầu Dội Xuống!</span>
-          </button>
-          <div id="detail-svg-stage"></div>
-        </div>
-        <div class="info-card">
-          <div id="detail-desc-stage"></div>
-        </div>
+        <div id="detail-svg-stage" class="canvas-card"></div>
+        <div id="detail-desc-stage" class="info-card"></div>
       </div>
     </div>
 
@@ -336,7 +325,7 @@
 
   <script>
     // ==========================================
-    // LOGIC PHẦN 1: TOÀN CẢNH 3 TẦNG
+    // 1. DỮ LIỆU & HÀM VẼ CHO PHẦN 1 (TOÀN CẢNH)
     // ==========================================
     let currentMode = 'bad';
     let currentType = 1;
@@ -344,7 +333,7 @@
     function baseSlabs(isGood, note) {
       return `
         <rect x="70" y="38" width="350" height="10" fill="#1e293b" stroke="#475569" stroke-width="1.5" />
-        <text x="8" y="47" fill="#cbd5e1" font-size="11" font-weight="bold">Chuồng khu</text>
+        <text x="8" y="47" fill="#cbd5e1" font-size="11" font-weight="bold">Mái Chuồng khu</text>
 
         <rect x="70" y="112" width="350" height="10" fill="#1e293b" stroke="#475569" stroke-width="1.5" />
         <text x="8" y="121" fill="#cbd5e1" font-size="11" font-weight="bold">Tầng thượng</text>
@@ -399,210 +388,258 @@
       `;
     }
 
+    function bubblesT2AndTretHTML(stackX) {
+      return `
+        ${threeToiletsHTML(false, stackX, false, true)}
+        <rect x="${stackX + 3}" y="212" width="20" height="36" rx="4" fill="#0ea5e9" class="water-slug" />
+
+        <path d="M172 178 L200 178 L${stackX} 200" fill="none" stroke="#f87171" stroke-width="2.5" class="air-path" />
+        <circle cx="172" cy="178" r="6" fill="#ef4444" class="bubble-bad" />
+        <text x="14" y="172" fill="#f87171" font-size="11.5" font-weight="bold">3A. Hút ục Tầng 2!</text>
+
+        <path d="${stackX + 13} 285 L${stackX + 13} 348 L172 348" fill="none" stroke="#f87171" stroke-width="3" class="air-path" />
+        <circle cx="172" cy="326" r="6" fill="#ef4444" class="bubble-bad" style="animation-delay: 0.4s" />
+        <text x="14" y="326" fill="#f87171" font-size="11.5" font-weight="bold">3B. Nén ục Tầng Trệt!</text>
+      `;
+    }
+
     const scenarios = {
       1: {
         badSVG: `
           <svg viewBox="0 0 435 425">
-            ${baseSlabs(false, '(1 Ống)')}
-            <rect x="155" y="358" width="245" height="58" rx="6" fill="#0f172a" stroke="#ef4444" stroke-width="2" />
-            <rect x="157" y="376" width="241" height="38" rx="4" fill="#991b1b" opacity="0.6" class="red-zone" />
-            <text x="175" y="402" fill="#fca5a5" font-size="11.5" font-weight="bold">HẦM TỰ HOẠI (BÍ KHÍ ĐỎ)</text>
+            ${baseSlabs(false, '(Dạng 1 ống)')}
+            <rect x="180" y="318" width="215" height="98" rx="6" fill="#0f172a" stroke="#64748b" stroke-width="2" />
+            <rect x="182" y="344" width="211" height="70" rx="4" fill="#1e3a8a" opacity="0.8" />
+            <line x1="182" y1="344" x2="393" y2="344" stroke="#38bdf8" stroke-width="2" stroke-dasharray="6 4" />
+            <text x="195" y="402" fill="#93c5fd" font-size="11.5" font-weight="bold">HẦM TỰ HOẠI (Mực nước ngập đáy ống)</text>
 
-            <rect x="296" y="8" width="24" height="360" fill="#334155" stroke="#94a3b8" stroke-width="1.5" />
-            <circle cx="308" cy="20" r="10" fill="#ef4444" />
-            <text x="304" y="24" fill="#fff" font-size="12" font-weight="bold">X</text>
-            <text x="250" y="14" fill="#fca5a5" font-size="11" font-weight="bold">1. Tắc thông hơi Φ34</text>
+            <rect x="296" y="8" width="26" height="352" fill="#334155" stroke="#94a3b8" stroke-width="1.5" />
+            <rect x="299" y="12" width="20" height="182" fill="#ef4444" class="red-zone" />
+            <rect x="299" y="248" width="20" height="106" fill="#ef4444" class="red-zone" />
 
-            <rect x="299" y="48" width="18" height="156" fill="#ef4444" class="red-zone" />
-            <rect x="299" y="280" width="18" height="88" fill="#ef4444" class="red-zone" />
+            <circle cx="309" cy="20" r="10" fill="#ef4444" />
+            <text x="305" y="24" fill="#fff" font-size="12" font-weight="bold">X</text>
+            <text x="14" y="24" fill="#fca5a5" font-size="11" font-weight="bold">1. Ống ngọn Φ34 bị nghẹt / cụt</text>
+            <line x1="172" y1="20" x2="295" y2="20" stroke="#ef4444" stroke-width="2" />
 
-            ${threeToiletsHTML(false, 296, false, true)}
-            <rect x="299" y="210" width="18" height="42" rx="4" fill="#0ea5e9" class="water-slug" />
+            <circle cx="309" cy="356" r="10" fill="#ef4444" />
+            <text x="305" y="360" fill="#fff" font-size="12" font-weight="bold">X</text>
+            <text x="14" y="356" fill="#fca5a5" font-size="11" font-weight="bold">2. Đáy ống ngập nước hầm</text>
+            <line x1="150" y1="356" x2="295" y2="356" stroke="#ef4444" stroke-width="2" />
 
-            <path d="M172 178 L200 178 L296 200" fill="none" stroke="#f87171" stroke-width="2.5" class="air-path" />
-            <circle cx="172" cy="178" r="6" fill="#ef4444" class="bubble-bad" />
-            <text x="14" y="172" fill="#f87171" font-size="11.5" font-weight="bold">3A. Hút ục Tầng 2!</text>
-
-            <path d="M308 285 L308 348 L172 348" fill="none" stroke="#f87171" stroke-width="3" class="air-path" />
-            <circle cx="172" cy="326" r="6" fill="#ef4444" class="bubble-bad" style="animation-delay:0.4s" />
-            <text x="14" y="326" fill="#f87171" font-size="11.5" font-weight="bold">3B. Nén ục Tầng Trệt!</text>
+            ${bubblesT2AndTretHTML(296)}
           </svg>
         `,
         goodSVG: `
           <svg viewBox="0 0 435 425">
-            ${baseSlabs(true, '(1 Ống)')}
-            <rect x="155" y="358" width="245" height="58" rx="6" fill="#0f172a" stroke="#22c55e" stroke-width="2" />
-            <rect x="157" y="376" width="241" height="38" rx="4" fill="#1e3a8a" opacity="0.8" />
-            <text x="175" y="402" fill="#93c5fd" font-size="11.5" font-weight="bold">HẦM TỰ HOẠI (Hút hạ mực nước)</text>
+            ${baseSlabs(true, '(Dạng 1 ống)')}
+            <rect x="180" y="318" width="215" height="98" rx="6" fill="#0f172a" stroke="#64748b" stroke-width="2" />
+            <rect x="182" y="344" width="211" height="70" rx="4" fill="#1e3a8a" opacity="0.8" />
+            <line x1="182" y1="344" x2="393" y2="344" stroke="#38bdf8" stroke-width="2" stroke-dasharray="6 4" />
+            <text x="195" y="402" fill="#93c5fd" font-size="11.5" font-weight="bold">HẦM TỰ HOẠI (Đã hạ nước & Thông thoáng)</text>
 
-            <rect x="296" y="8" width="24" height="360" fill="#334155" stroke="#94a3b8" stroke-width="1.5" />
+            <rect x="296" y="8" width="26" height="352" fill="#334155" stroke="#94a3b8" stroke-width="1.5" />
+            <text x="330" y="14" fill="#4ade80" font-size="11" font-weight="bold">Thoát hơi lên mái ↑</text>
+
             <path d="M296 46 L210 46 L210 18 L220 18 L220 38 L296 38 Z" fill="#22c55e" />
+            <path d="M296 46 L210 46 L210 18" fill="none" stroke="#22c55e" stroke-width="12" stroke-linecap="round" />
+            <path d="M296 46 L210 46 L210 18" fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round" />
+            <circle cx="210" cy="18" r="16" fill="none" stroke="#4ade80" stroke-width="2" stroke-dasharray="3 3" />
             <text x="95" y="32" fill="#4ade80" font-size="11.5" font-weight="bold">1. Mở Chữ T Tầng Thượng (Cứu Tầng 2!)</text>
 
-            <path d="M320 338 L360 338 L360 382" fill="none" stroke="#22c55e" stroke-width="8" stroke-linecap="round" />
-            <text x="305" y="332" fill="#4ade80" font-size="11" font-weight="bold">2. Chữ Y thông trần hầm (Cứu Trệt!)</text>
+            <path d="M322 344 L360 344 L360 382" fill="none" stroke="#22c55e" stroke-width="12" stroke-linecap="round" />
+            <path d="M322 344 L360 344 L360 382" fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round" />
+            <circle cx="360" cy="382" r="14" fill="none" stroke="#4ade80" stroke-width="2" stroke-dasharray="3 3" />
+            <text x="305" y="332" fill="#4ade80" font-size="11" font-weight="bold">2. Chữ Y thông trần hầm</text>
+            <text x="305" y="344" fill="#4ade80" font-size="11" font-weight="bold">(Cứu Trệt!)</text>
 
-            ${threeToiletsHTML(true, 296, false, true)}
-            <rect x="299" y="210" width="18" height="42" rx="4" fill="#0ea5e9" class="water-slug" />
-            <path d="M215 18 L215 42 L308 42 L308 200" fill="none" stroke="#4ade80" stroke-width="3" class="air-path" />
-            <path d="M308 260 L308 338 L360 338" fill="none" stroke="#4ade80" stroke-width="3" class="air-path" />
+            ${threeToiletsHTML(true, 296, false, false)}
+            <rect x="299" y="212" width="20" height="36" rx="4" fill="#0ea5e9" class="water-slug" />
+            <path d="M210 18 L210 42 L309 42 L309 195" fill="none" stroke="#4ade80" stroke-width="3.5" class="air-path" />
+            <path d="M309 248 L309 344 L360 344 L360 382" fill="none" stroke="#4ade80" stroke-width="3" class="air-path" />
             <text x="14" y="240" fill="#4ade80" font-size="12" font-weight="bold">Cả 3 tầng xoáy cái ọt - Êm 100%!</text>
           </svg>
         `,
         badDesc: `
           <div class="box-bad">
             <div class="box-title-bad">❌ Dạng 1 (Hiện tại): Cả 3 tầng chung 1 ống đứng Φ90/114</div>
-            <p>Hộp GEN chỉ có 1 ống duy nhất vừa xả phân vừa kiêm luôn thông hơi:</p>
+            <p>Toàn bộ 3 tầng đấu chung vào 1 ống đứng trong hộp GEN và đang bị tắc nghẽn ở cả 2 đầu:</p>
           </div>
           <ul class="bullet-list">
-            <li><b>1. Ống ngọn bị nghẹt/cụt trên chuồng khu:</b> Toàn bộ cột ống bị cô lập khí.</li>
-            <li><b>3A (Khi Tầng 1 xả):</b> Khối nước lao xuống tạo <b>chân không hút tụt con thỏ Tầng 2 → ục ục</b>!</li>
-            <li><b>3B (Khi Tầng 1 xả):</b> Dòng nước dồn xuống chân ống nén khí đỏ đập ngược vào con thỏ bồn cầu <b>Tầng Trệt → sủi bọt ục ục</b>!</li>
+            <li><b>1 & 3A (Trên Tầng 1):</b> Ống ngọn thông hơi Φ34 ở Chuồng khu bị nghẹt / cụt → Khi <b>Tầng 1 xả nước</b>, khối nước lao xuống tạo vùng chân không (<b>khí đỏ</b>), <b>hút tụt con thỏ bồn cầu Tầng 2 → phát tiếng ục ục</b>!</li>
+            <li><b>2 & 3B (Dưới Tầng 1):</b> Đáy ống cắm ngập vào mực nước hầm tự hoại → Khối nước từ Tầng 1 lao xuống nén khí đỏ dồn xuống đáy, không có lối thoát nên <b>đập ngược vào con thỏ bồn cầu Tầng Trệt → sủi bọt ục ục</b> (và làm tầng trệt tự xả nước rút rất từ từ)!</li>
           </ul>
         `,
         goodDesc: `
           <div class="box-good">
-            <div class="box-title-good">✅ Giải pháp Dạng 1: Đục hộp GEN thông 2 đầu ống đứng</div>
+            <div class="box-title-good">✅ Giải pháp Dạng 1: Thông thông hơi 2 đầu ống đứng</div>
             <p>Xử lý triệt để cả đỉnh áp âm lẫn đáy áp dương:</p>
           </div>
           <ul class="bullet-list">
-            <li><b>1. Cắt mở Tê Φ90/60 ở Tầng thượng / Chuồng khu:</b> Đưa ống lấy gió tươi tự nhiên ngoài trời vào đỉnh ống → Triệt tiêu hoàn toàn lực hút Tầng 2!</li>
-            <li><b>2. Đấu chữ Y thoát khí chân ống vào trần hầm:</b> Giải phóng áp suất nén khi nước dội xuống → Bồn cầu Tầng trệt không bao giờ bị ục!</li>
+            <li><b>1. Mở Chữ T ở Tầng thượng / Chuồng khu:</b> Đưa ống lấy gió tươi tự nhiên ngoài trời vào đỉnh ống đứng → Triệt tiêu lực hút Tầng 2!</li>
+            <li><b>2. Đấu nhánh chữ Y thoát khí chân ống vào trần hầm:</b> Giải phóng áp suất nén khi nước dội xuống → Bồn cầu Tầng trệt không bao giờ bị ục!</li>
           </ul>
         `
       },
+
       2: {
         badSVG: `
           <svg viewBox="0 0 435 425">
-            ${baseSlabs(false, '(2 Ống Cụt)')}
-            <rect x="155" y="358" width="245" height="58" rx="6" fill="#0f172a" stroke="#ef4444" stroke-width="2" />
-            <rect x="157" y="376" width="241" height="38" rx="4" fill="#991b1b" opacity="0.6" class="red-zone" />
-            <text x="175" y="402" fill="#fca5a5" font-size="11.5" font-weight="bold">HẦM TỰ HOẠI (BÍ KHÍ ĐỎ)</text>
+            ${baseSlabs(false, '(Dạng 2 ống)')}
+            <rect x="180" y="318" width="215" height="98" rx="6" fill="#0f172a" stroke="#64748b" stroke-width="2" />
+            <rect x="182" y="344" width="211" height="70" rx="4" fill="#1e3a8a" opacity="0.8" />
+            <line x1="182" y1="344" x2="393" y2="344" stroke="#38bdf8" stroke-width="2" stroke-dasharray="6 4" />
+            <text x="192" y="402" fill="#93c5fd" font-size="11.5" font-weight="bold">HẦM TỰ HOẠI (Mực nước ngập đáy 2 ống)</text>
 
-            <rect x="282" y="8" width="24" height="360" fill="#334155" stroke="#94a3b8" stroke-width="1.5" />
-            <rect x="342" y="112" width="16" height="230" fill="#334155" stroke="#94a3b8" stroke-width="1.5" />
-            <rect x="340" y="106" width="20" height="6" fill="#ef4444" />
-            <text x="325" y="98" fill="#fca5a5" font-size="11" font-weight="bold">1. Ống gió cụt ở Lầu 2!</text>
+            <rect x="264" y="112" width="26" height="248" fill="#334155" stroke="#94a3b8" stroke-width="1.5" />
+            <rect x="267" y="114" width="20" height="80" fill="#ef4444" class="red-zone" />
+            <rect x="267" y="248" width="20" height="112" fill="#ef4444" class="red-zone" />
 
-            <rect x="285" y="48" width="18" height="156" fill="#ef4444" class="red-zone" />
-            <rect x="285" y="280" width="18" height="88" fill="#ef4444" class="red-zone" />
+            <rect x="334" y="8" width="14" height="352" fill="#334155" stroke="#94a3b8" stroke-width="1.5" />
+            <circle cx="277" cy="112" r="10" fill="#ef4444" />
+            <text x="273" y="116" fill="#fff" font-size="12" font-weight="bold">X</text>
+            <text x="295" y="100" fill="#fca5a5" font-size="11" font-weight="bold">1. Ống Φ90 cụt ở Lầu 2!</text>
 
-            ${threeToiletsHTML(false, 282, false, true)}
-            <rect x="285" y="210" width="18" height="42" rx="4" fill="#0ea5e9" class="water-slug" />
+            <circle cx="277" cy="356" r="10" fill="#ef4444" />
+            <text x="273" y="360" fill="#fff" font-size="12" font-weight="bold">X</text>
+            <circle cx="341" cy="356" r="10" fill="#ef4444" />
+            <text x="337" y="360" fill="#fff" font-size="12" font-weight="bold">X</text>
+            <text x="14" y="336" fill="#fca5a5" font-size="11" font-weight="bold">2. Đáy 2 ống ngập nước hầm</text>
+            <text x="14" y="351" fill="#fca5a5" font-size="11" font-weight="bold">→ Khí đỏ không sang Φ42 được!</text>
+            <line x1="172" y1="340" x2="265" y2="354" stroke="#ef4444" stroke-width="2" />
 
-            <path d="M172 178 L200 178 L282 200" fill="none" stroke="#f87171" stroke-width="2.5" class="air-path" />
-            <circle cx="172" cy="178" r="6" fill="#ef4444" class="bubble-bad" />
-            <text x="14" y="172" fill="#f87171" font-size="11.5" font-weight="bold">3A. Hút ục Tầng 2!</text>
-
-            <path d="M294 285 L294 348 L172 348" fill="none" stroke="#f87171" stroke-width="3" class="air-path" />
-            <circle cx="172" cy="326" r="6" fill="#ef4444" class="bubble-bad" style="animation-delay:0.4s" />
-            <text x="14" y="326" fill="#f87171" font-size="11.5" font-weight="bold">3B. Nén ục Tầng Trệt!</text>
+            ${bubblesT2AndTretHTML(264)}
           </svg>
         `,
         goodSVG: `
           <svg viewBox="0 0 435 425">
-            ${baseSlabs(true, '(2 Ống Chuẩn)')}
-            <rect x="155" y="358" width="245" height="58" rx="6" fill="#0f172a" stroke="#22c55e" stroke-width="2" />
-            <rect x="157" y="376" width="241" height="38" rx="4" fill="#1e3a8a" opacity="0.8" />
-            <text x="175" y="402" fill="#93c5fd" font-size="11.5" font-weight="bold">HẦM TỰ HOẠI (Thông thoáng)</text>
+            ${baseSlabs(true, '(Dạng 2 ống)')}
+            <rect x="180" y="318" width="215" height="98" rx="6" fill="#0f172a" stroke="#64748b" stroke-width="2" />
+            <rect x="182" y="344" width="211" height="70" rx="4" fill="#1e3a8a" opacity="0.8" />
+            <line x1="182" y1="344" x2="393" y2="344" stroke="#38bdf8" stroke-width="2" stroke-dasharray="6 4" />
+            <text x="192" y="402" fill="#93c5fd" font-size="11.5" font-weight="bold">HẦM TỰ HOẠI (Bất chấp nước ngập đáy)</text>
 
-            <rect x="282" y="8" width="24" height="360" fill="#334155" stroke="#94a3b8" stroke-width="1.5" />
-            <rect x="342" y="8" width="16" height="330" fill="#22c55e" stroke="#16a34a" stroke-width="1.5" />
-            <text x="325" y="24" fill="#4ade80" font-size="11" font-weight="bold">1. Phóng thẳng lên trời</text>
+            <rect x="264" y="112" width="26" height="248" fill="#334155" stroke="#94a3b8" stroke-width="1.5" />
+            <rect x="334" y="8" width="14" height="352" fill="#334155" stroke="#94a3b8" stroke-width="1.5" />
+            <text x="305" y="14" fill="#4ade80" font-size="11" font-weight="bold">Thoát hơi lên mái ↑</text>
 
-            <path d="M306 120 L342 98" stroke="#22c55e" stroke-width="8" stroke-linecap="round" />
-            <path d="M306 280 L342 258" stroke="#22c55e" stroke-width="8" stroke-linecap="round" />
-            <text x="330" y="270" fill="#4ade80" font-size="11" font-weight="bold">2. Trích Y cân bằng khí</text>
+            <path d="M290 122 L334 94" stroke="#22c55e" stroke-width="12" stroke-linecap="round" />
+            <path d="M290 122 L334 94" stroke="#0f172a" stroke-width="6" stroke-linecap="round" />
+            <circle cx="312" cy="108" r="18" fill="none" stroke="#4ade80" stroke-width="2" stroke-dasharray="3 3" />
+            <text x="352" y="104" fill="#4ade80" font-size="11" font-weight="bold">← 1. Nối ngọn Tầng 2</text>
 
-            ${threeToiletsHTML(true, 282, false, true)}
-            <rect x="285" y="210" width="18" height="42" rx="4" fill="#0ea5e9" class="water-slug" />
-            <path d="M350 8 L350 120 L306 120 L294 200" fill="none" stroke="#4ade80" stroke-width="3" class="air-path" />
-            <text x="14" y="240" fill="#4ade80" font-size="12" font-weight="bold">Cả 3 tầng xoáy cái ọt - Êm 100%!</text>
+            <path d="M290 286 L334 250" stroke="#22c55e" stroke-width="12" stroke-linecap="round" />
+            <path d="M290 286 L334 250" stroke="#0f172a" stroke-width="6" stroke-linecap="round" />
+            <circle cx="312" cy="268" r="18" fill="none" stroke="#4ade80" stroke-width="2" stroke-dasharray="3 3" />
+            <text x="352" y="262" fill="#4ade80" font-size="11" font-weight="bold">← 2. Cầu vượt Chữ Y</text>
+            <text x="352" y="276" fill="#4ade80" font-size="11" font-weight="bold">chân Tầng trệt</text>
+
+            ${threeToiletsHTML(true, 264, false, false)}
+            <rect x="267" y="212" width="20" height="36" rx="4" fill="#0ea5e9" class="water-slug" />
+            <path d="M277 248 L277 286 L341 245 L341 12" fill="none" stroke="#4ade80" stroke-width="3.5" class="air-path" />
+            <path d="M341 94 L277 122 L277 195" fill="none" stroke="#38bdf8" stroke-width="3" class="air-path" />
+            <text x="14" y="175" fill="#4ade80" font-size="12" font-weight="bold">Cả 3 tầng xoáy cái ọt - Êm 100%!</text>
           </svg>
         `,
         badDesc: `
           <div class="box-bad">
-            <div class="box-title-bad">❌ Dạng 2 (Hiện tại): Có ống gió thứ 2 nhưng bị cụt ở Lầu 2</div>
-            <p>Hộp GEN có 2 ống nhưng thợ cũ không phóng ống gió lên mái mà bịt đầu hoặc bỏ cụt ngang trần Lầu 2:</p>
+            <div class="box-title-bad">❌ Dạng 2 (Hiện tại): Ống Φ90 bị cụt ngọn ở Tầng 2 & Ngập đáy</div>
+            <p>Thợ kéo ống hơi Φ42 từ hầm lên mái Chuồng khu, nhưng <b>ống phân Φ90 nối 3 tầng lại bị bịt cụt ngay tại Tầng 2</b>:</p>
           </div>
           <ul class="bullet-list">
-            <li><b>1. Ống gió cụt không lấy được khí ngoài trời:</b> Vô tác dụng, vẫn bí khí hệt như Dạng 1!</li>
-            <li><b>3A:</b> Xả Tầng 1 vẫn <b>hút giật tụt nước bồn cầu Tầng 2</b>!</li>
-            <li><b>3B:</b> Nén khí đỏ ở đáy <b>dội ngược vào Tầng trệt sủi bọt</b>!</li>
+            <li><b>1 & 3A (Trên Tầng 1):</b> Khi <b>Tầng 1 nhấn xả</b>, vì đỉnh ống Φ90 ở Tầng 2 bị cụt không có khí cấp vào → Vùng khí đỏ phía trên bị rút chân không, <b>hút ục bồn cầu Tầng 2</b>!</li>
+            <li><b>2 & 3B (Dưới Tầng 1):</b> Đáy 2 ống dưới hầm bị nước ngập bít (<b>2 dấu X đỏ</b>), khí đỏ phía dưới không sang ống Φ42 được → <b>Phụt bọt làm ục Tầng Trệt</b> (và làm Tầng trệt rút nước từ từ)!</li>
           </ul>
         `,
         goodDesc: `
           <div class="box-good">
-            <div class="box-title-good">✅ Giải pháp Dạng 2: Phóng ống gió lên chuồng khu + Đấu cầu nối</div>
-            <p>Khôi phục bản chất hệ thống thoát nước 2 ống chuẩn khách sạn:</p>
+            <div class="box-title-good">✅ Giải pháp Dạng 2: Bắt 2 "Cầu Vượt Chữ Y" sang ống Φ42</div>
+            <p>Tận dụng ngay ống thông hơi Φ42 đang nằm sát bên ống phân Φ90 trong hộp GEN:</p>
           </div>
           <ul class="bullet-list">
-            <li><b>1. Nối dài ống gió thứ 2 xuyên mái chuồng khu:</b> Lấy gió tươi tự nhiên liên tục.</li>
-            <li><b>2. Đấu nhánh Y 45° cân bằng giữa ống phân và ống gió:</b> Hút xả đối lưu êm ru, bảo vệ toàn bộ con thỏ ngăn mùi của cả 3 tầng.</li>
+            <li><b>1. Bắt cầu ở ngọn Tầng 2:</b> Nối đỉnh ống phân Φ90 thông sang ống hơi Φ42 → Khi Tầng 1 xả, khí từ ống Φ42 tràn sang cấp cho Tầng 2 ngay lập tức!</li>
+            <li><b>2. Bắt "Cầu vượt Chữ Y" ở chân Tầng trệt (+230mm):</b> Nằm cao hơn mặt nước hầm → Khi Tầng 1, 2 xả xuống, khí nén rẽ qua Chữ Y phóng lên ống Φ42; bản thân Tầng trệt xả cũng <b>xoáy cái ọt</b>!</li>
           </ul>
         `
       },
+
       3: {
         badSVG: `
           <svg viewBox="0 0 435 425">
-            ${baseSlabs(false, '(Trệt Đi Riêng)')}
-            <rect x="155" y="358" width="245" height="58" rx="6" fill="#0f172a" stroke="#ef4444" stroke-width="2" />
-            <rect x="157" y="376" width="241" height="38" rx="4" fill="#991b1b" opacity="0.6" class="red-zone" />
-            <text x="175" y="402" fill="#fca5a5" font-size="11.5" font-weight="bold">HẦM TỰ HOẠI (BÍ KHÍ ĐỎ)</text>
+            ${baseSlabs(false, '(Trệt đi riêng)')}
+            <rect x="155" y="318" width="245" height="98" rx="6" fill="#0f172a" stroke="#64748b" stroke-width="2" />
+            <rect x="157" y="320" width="241" height="36" rx="4" fill="#ef4444" class="red-zone" />
+            <rect x="157" y="356" width="241" height="58" rx="4" fill="#1e3a8a" opacity="0.8" />
+            <line x1="157" y1="356" x2="398" y2="356" stroke="#38bdf8" stroke-width="2" stroke-dasharray="6 4" />
+            <text x="168" y="342" fill="#fff" font-size="11" font-weight="bold">2. KHOANG HẦM BỊ BÍ KHÍ ĐỎ</text>
+            <text x="175" y="402" fill="#93c5fd" font-size="11.5" font-weight="bold">HẦM TỰ HOẠI CHUNG CỦA CẢ NHÀ</text>
 
-            <rect x="296" y="8" width="24" height="360" fill="#334155" stroke="#94a3b8" stroke-width="1.5" />
-            <rect x="299" y="48" width="18" height="156" fill="#ef4444" class="red-zone" />
-            <rect x="299" y="280" width="18" height="88" fill="#ef4444" class="red-zone" />
+            <rect x="272" y="112" width="24" height="225" fill="#334155" stroke="#94a3b8" stroke-width="1.5" />
+            <rect x="275" y="114" width="18" height="90" fill="#ef4444" class="red-zone" />
+            <rect x="275" y="242" width="18" height="92" fill="#ef4444" class="red-zone" />
 
-            ${threeToiletsHTML(false, 296, true, true)}
-            <rect x="299" y="210" width="18" height="42" rx="4" fill="#0ea5e9" class="water-slug" />
+            <rect x="336" y="8" width="14" height="325" fill="#334155" stroke="#94a3b8" stroke-width="1.5" />
+            <circle cx="343" cy="322" r="10" fill="#ef4444" />
+            <text x="339" y="326" fill="#fff" font-size="12" font-weight="bold">X</text>
+            <text x="305" y="14" fill="#fca5a5" font-size="11" font-weight="bold">1. Tắc thông hơi</text>
 
-            <path d="M172 178 L200 178 L296 200" fill="none" stroke="#f87171" stroke-width="2.5" class="air-path" />
-            <circle cx="172" cy="178" r="6" fill="#ef4444" class="bubble-bad" />
-            <text x="14" y="172" fill="#f87171" font-size="11.5" font-weight="bold">3A. Hút ục Tầng 2!</text>
+            ${threeToiletsHTML(false, 272, true, true)}
+            <rect x="275" y="212" width="18" height="36" rx="4" fill="#0ea5e9" class="water-slug" />
+            <text x="14" y="328" fill="#fbbf24" font-size="11" font-weight="bold">Trệt đi ống riêng →</text>
 
-            <path d="M308 285 L308 380 L235 380 L202 380 L202 344 L172 344" fill="none" stroke="#f87171" stroke-width="3" class="air-path" />
-            <circle cx="172" cy="326" r="6" fill="#ef4444" class="bubble-bad" style="animation-delay:0.4s" />
-            <text x="14" y="326" fill="#f87171" font-size="11.5" font-weight="bold">3B. Ép qua hầm ục Trệt!</text>
+            <path d="M172 112 L200 134 L275 134" fill="none" stroke="#f87171" stroke-width="2.5" class="air-path" />
+            <circle cx="172" cy="105" r="6" fill="#ef4444" class="bubble-bad" />
+            <text x="14" y="106" fill="#f87171" font-size="11.5" font-weight="bold">3A. Hút ục Tầng 2!</text>
+
+            <path d="M284 255 L284 335 L186 335 L186 275" fill="none" stroke="#f87171" stroke-width="3" class="air-path" />
+            <circle cx="172" cy="260" r="6" fill="#ef4444" class="bubble-bad" style="animation-delay:0.4s" />
+            <text x="14" y="258" fill="#f87171" font-size="11.5" font-weight="bold">3B. Dội qua hầm ục Trệt!</text>
           </svg>
         `,
         goodSVG: `
           <svg viewBox="0 0 435 425">
-            ${baseSlabs(true, '(Trệt Đi Riêng)')}
-            <rect x="155" y="358" width="245" height="58" rx="6" fill="#0f172a" stroke="#22c55e" stroke-width="2" />
-            <rect x="157" y="376" width="241" height="38" rx="4" fill="#1e3a8a" opacity="0.8" />
+            ${baseSlabs(true, '(Trệt đi riêng)')}
+            <rect x="155" y="318" width="245" height="98" rx="6" fill="#0f172a" stroke="#64748b" stroke-width="2" />
+            <rect x="157" y="356" width="241" height="58" rx="4" fill="#1e3a8a" opacity="0.8" />
+            <line x1="157" y1="356" x2="398" y2="356" stroke="#38bdf8" stroke-width="2" stroke-dasharray="6 4" />
             <text x="175" y="402" fill="#93c5fd" font-size="11.5" font-weight="bold">HẦM TỰ HOẠI (Khoang khí thông thoáng)</text>
 
-            <rect x="296" y="8" width="24" height="360" fill="#334155" stroke="#94a3b8" stroke-width="1.5" />
-            <path d="M296 46 L210 46 L210 18 L220 18 L220 38 L296 38 Z" fill="#22c55e" />
-            <text x="95" y="32" fill="#4ade80" font-size="11.5" font-weight="bold">1. Mở hơi ngọn T2 / Thượng</text>
+            <rect x="272" y="112" width="24" height="225" fill="#334155" stroke="#94a3b8" stroke-width="1.5" />
+            <rect x="336" y="8" width="14" height="325" fill="#334155" stroke="#94a3b8" stroke-width="1.5" />
 
-            <path d="M350 358 L350 320 L395 320" fill="none" stroke="#22c55e" stroke-width="8" stroke-linecap="round" />
-            <text x="285" y="326" fill="#4ade80" font-size="11" font-weight="bold">2. Ống giải áp trần hầm</text>
+            <path d="M296 122 L336 94" stroke="#22c55e" stroke-width="11" stroke-linecap="round" />
+            <path d="M296 122 L336 94" stroke="#0f172a" stroke-width="5" stroke-linecap="round" />
+            <text x="352" y="104" fill="#4ade80" font-size="11" font-weight="bold">← 1. Mở hơi ngọn T2</text>
 
-            ${threeToiletsHTML(true, 296, true, true)}
-            <rect x="299" y="210" width="18" height="42" rx="4" fill="#0ea5e9" class="water-slug" />
-            <text x="14" y="240" fill="#4ade80" font-size="12" font-weight="bold">Cả 3 tầng xoáy cái ọt - Êm 100%!</text>
+            <path d="M296 286 L336 250" stroke="#22c55e" stroke-width="11" stroke-linecap="round" />
+            <path d="M296 286 L336 250" fill="none" stroke="#0f172a" stroke-width="5" stroke-linecap="round" />
+            <text x="352" y="262" fill="#4ade80" font-size="11" font-weight="bold">← 2. Thông trần hầm</text>
+            <text x="352" y="276" fill="#4ade80" font-size="11" font-weight="bold">& Chữ Y chân ống</text>
+
+            ${threeToiletsHTML(true, 272, false, true)}
+            <rect x="275" y="212" width="18" height="36" rx="4" fill="#0ea5e9" class="water-slug" />
+            <path d="M186 290 L186 335 L343 335 L343 12" fill="none" stroke="#4ade80" stroke-width="3.5" class="air-path" />
+            <text x="14" y="175" fill="#4ade80" font-size="12" font-weight="bold">Cả 3 tầng xoáy cái ọt - Êm 100%!</text>
           </svg>
         `,
         badDesc: `
           <div class="box-bad">
-            <div class="box-title-bad">❌ Dạng 3 (Hiện tại): Trệt đi riêng, Lầu 1-2 đi chung vào hầm bí</div>
-            <p>Ống Trệt đi độc lập thẳng vào hầm (nên tự xả rút rất từ từ do hầm bí), còn Lầu 1-2 đi chung 1 ống:</p>
+            <div class="box-title-bad">❌ Dạng 3 (Hiện tại): Trệt đi riêng, Lầu 1 & 2 đi riêng vào Hầm bí đỏ</div>
+            <p>Bồn cầu Tầng trệt cắm ống riêng xuống hầm (nên rút rất từ từ khi hầm bí hơi), còn Lầu 1 & 2 đi chung ống trong hộp GEN:</p>
           </div>
           <ul class="bullet-list">
-            <li><b>3A (Khi Tầng 1 xả):</b> Thiếu hơi ngọn trên cao → <b>Hút ục Tầng 2</b>!</li>
-            <li><b>3B (Khi Tầng 1 xả):</b> Khối nước dội vào hầm ép khí đỏ trong hầm <b>dội ngược vào đường ống riêng của Trệt làm Trệt ục</b>!</li>
+            <li><b>3A (Khi Tầng 1 xả):</b> Phía trên Tầng 1 bị thiếu hơi ngọn → <b>Hút ục Tầng 2</b>!</li>
+            <li><b>3B (Khi Tầng 1 xả):</b> Nước từ Tầng 1 lao xuống hầm đang bị bí khí đỏ (<b>2</b>) → Ép khí đỏ trong hầm <b>dội ngược lên ống riêng của Tầng Trệt làm Trệt ục</b>!</li>
           </ul>
         `,
         goodDesc: `
           <div class="box-good">
-            <div class="box-title-good">✅ Giải pháp Dạng 3: Mở hơi ngọn T2 + Giải áp nắp hầm tự hoại</div>
-            <p>Giải phóng cả ngọn ống trên cao lẫn khoảng đệm khí của hầm tự hoại:</p>
+            <div class="box-title-good">✅ Giải pháp Dạng 3: Mở hơi ngọn Tầng 2 + Thông trần Hầm Tự Hoại</div>
+            <p>Giải phóng cả ngọn ống trên lầu lẫn khoang khí của Hầm tự hoại:</p>
           </div>
           <ul class="bullet-list">
-            <li><b>1. Mở hơi ngọn trên Tầng 2 / Thượng:</b> Cấp khí tươi tức thì → Cứu Lầu 2!</li>
-            <li><b>2. Đặt ống thông hơi trên nắp trần hầm:</b> Khí nén trong hầm tự thoát ra ngoài, bồn cầu Trệt được nâng nền +230mm dốc rơi cực mạnh, <b>xoáy cái ọt</b> êm ru!</li>
+            <li><b>1. Mở hơi ngọn trên Tầng 2 / Tầng thượng:</b> Cấp khí tươi xuống khi Tầng 1 xả → Cứu Tầng 2!</li>
+            <li><b>2. Thông sạch ống hơi Φ42 trên trần hầm + đấu Chữ Y chân hộp GEN:</b> Giúp bồn cầu Tầng trệt thoát khí trực tiếp, <b>xoáy cái ọt</b> và không bao giờ bị nước từ lầu dội ngược qua hầm nữa!</li>
           </ul>
         `
       }
@@ -624,11 +661,11 @@
     function setType(t) { currentType = t; renderPart1(); }
     function setMode(m) { currentMode = m; renderPart1(); }
 
+
     // ==========================================
-    // LOGIC PHẦN 2: THỦY LỰC CHÂN ỐNG ĐỨNG
+    // 2. DỮ LIỆU & HÀM VẼ CHO PHẦN 2 (SOI CHÂN ỐNG)
     // ==========================================
     let currentDetailScenario = 1;
-    let isFlushingActive = true;
 
     const detailScenarios = {
       1: {
@@ -663,7 +700,7 @@
             <text x="296" y="183" fill="#fecaca" font-size="10.5" font-weight="bold">BỊ LẤP KHÍ!</text>
 
             <!-- KHÍ ĐỎ BỊ NÉN ĐẬP NGƯỢC -->
-            <path d="M190 280 L190 200 L320 200" fill="none" stroke="#ef4444" stroke-width="3" class="gas-back-bad" />
+            <path d="M190 280 L190 200 L320 200" fill="none" stroke="#ef4444" stroke-width="3" stroke-dasharray="6 4" class="air-path" />
             <circle cx="173" cy="270" r="7" fill="#ef4444" class="bubble-bad" />
 
             <text x="18" y="240" fill="#ef4444" font-size="12" font-weight="bold">DÒNG NƯỚC BẮN VÀO</text>
@@ -804,15 +841,7 @@
       renderPart2();
     }
 
-    function triggerFlush() {
-      const stage = document.getElementById('detail-svg-stage');
-      stage.style.opacity = '0.5';
-      setTimeout(() => {
-        stage.style.opacity = '1';
-      }, 150);
-    }
-
-    // CHUYỂN QUA LẠI GIỮA 2 TAB LỚN
+    // CHUYỂN ĐỔI TAB CHÍNH
     function switchMainTab(tab) {
       if (tab === 1) {
         document.getElementById('section-1').style.display = 'block';
@@ -829,8 +858,9 @@
       }
     }
 
-    // KHỞI CHẠY MẶC ĐỊNH Ở PHẦN 2 (THEO ĐÚNG CÂU HỎI VỪA RỒI CỦA SẾP)
-    switchMainTab(2);
+    // CHẠY CẢ 2 ĐỂ NẠP SẴN DỮ LIỆU
+    renderPart1();
+    renderPart2();
   </script>
 </body>
 </html>
